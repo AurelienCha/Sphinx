@@ -3,6 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Latex Slides
+slides/main.*
+!slides/main.pdf
+!slides/main.tex
+
 # C extensions
 *.so
 
