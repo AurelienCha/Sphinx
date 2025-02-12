@@ -1,0 +1,49 @@
+\documentclass{beamer}
+
+\usepackage{tikz}
+\usepackage{ifthen}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+
+% Define TikZ styles
+\tikzset{
+    block/.style={rectangle, draw, minimum width=2cm, minimum height=1cm, align=center},
+    circleblock/.style={circle, draw, minimum size=0.8cm, align=center},
+    line/.style={draw, -latex}
+}
+
+% Create a global length to store the vertical offset.
+\newlength{\y}
+\setlength{\y}{0cm}
+
+% Define a new command to draw blocks or a rectangle with varying block size
+\newcommand{\drawBlocks}[4]{% 
+    % #1: nbr unit blocks (int)
+    % #2: draw unique block (true/false)
+    % #3: name (ascii)
+    % #4: printable text
+    \ifthenelse{\equal{#2}{true}}{
+        % Draw the big rectangle first
+        \node[draw, minimum width=(#1)*1.5 cm, minimum height=1cm, anchor=west] (#3) at (0, \y) {}; 
+        % If #2 is true, draw individual blocks (dashed) superposed on the rectangle
+        \foreach \i in {0,1,...,\numexpr(#1-1)} {
+            \node[draw, dashed, minimum width=1.5cm, minimum height=1cm, anchor=west] 
+            (#3-\i) at (\i*1.5, 0) {#4[\i]};
+        }
+    }{
+        % Draw the big rectangle first
+        \node[draw, minimum width=(#1)*1.5 cm, minimum height=1cm, anchor=west] (#3) at (0, \y) {#4};  
+    } 
+    \addtolength{\y}{-2.1cm}%
+}
+
+\begin{document}
+
+\begin{frame}
+    \begin{tikzpicture}
+    \drawBlocks{7}{true}{s3}{$s_3$}
+    \drawBlocks{7}{false}{beta}{$\beta_3$}
+    % \draw[line] (3-5.south) -- (2.north);
+    \end{tikzpicture}
+\end{frame}
+
+\end{document}
