@@ -4,7 +4,7 @@ from utils import *
 
 from tqdm import tqdm
 
-ITERATIONS = 10000
+ITERATIONS = 1
 progress_bar = tqdm(range(ITERATIONS))
 size = len(str(MOD))
 
