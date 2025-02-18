@@ -1,0 +1,10 @@
+\section{Multi-Party Computation (MPC)}
+
+The second approach to ensuring trust in the Sphinx header is to prevent user manipulation by decentralizing the scheme through the use of Multi-Party Computaftion (MPC).
+
+
+One major challenge in decentralizing the current schema (Figure \ref{fig:header_cipher}) lies in the integrity tag, which is the HMAC of the header $\beta_i$ computed using the shared secret $s_i$. To ensure security, no third party should have access to $s_i$, as collusion among third parties could lead to the recovery of all $s_i$, enabling them to decrypt the header and payload.
+
+To address this, third parties could compute a portion of the HMAC using a fragment of the shared secret $s_i$, and then combine these partial HMACs to produce the final HMAC. This approach would require a hash function with homomorphic properties, which inherently weakens the collusion resistance and potentially compromises the second pre-image resistance of a secure hash.
+
+However, even if breaking this homomorphic hash is feasible, if it remains computationally hard enough (e.g., requiring several hours), it could still be considered sufficiently secure for our purposes.
